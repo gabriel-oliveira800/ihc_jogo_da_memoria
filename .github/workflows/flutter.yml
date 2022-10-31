@@ -23,15 +23,24 @@ jobs:
 
       - name: Build Web
         run: flutter build web --release --web-renderer=html
-
+      
       - name: Deploy
         run: |
-          cd build/web
-          git init
-          git config --global user.email gabrielscorehero55@gmail.com
-          git config --global user.name gabriel-oliveira800
-          git status
-          git remote add origin https://${{secrets.token}}@github.com/gabriel-oliveira800/gabriel-oliveira800.github.io.git
-          git checkout -b gh-pages
-          git add --all
-          git commit -m "update"
+         git config user.name github-actions
+         git config user.email github-actions@github.com
+         git --work-tree build/web add --all
+         git commit -m "Automatic deployment by github-actions"
+         git push origin HEAD --force
+
+      # - name: Deploy
+      #   run: |
+        
+      #     cd build/web
+      #     git init
+      #     git config --global user.email gabrielscorehero55@gmail.com
+      #     git config --global user.name gabriel-oliveira800
+      #     git status
+      #     git remote add origin https://${{secrets.token}}@github.com/gabriel-oliveira800/gabriel-oliveira800.github.io.git
+      #     git checkout -b gh-pages
+      #     git add --all
+      #     git commit -m "update"
