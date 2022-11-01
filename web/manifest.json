@@ -1,11 +1,11 @@
 {
-    "name": "ihc_jogo_da_memoria",
-    "short_name": "ihc_jogo_da_memoria",
+    "name": "Jogo da memoria",
+    "short_name": "Jogo da memoria",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#EB2B6B",
+    "theme_color": "#EB2B6B",
+    "description": "Jogo desenvolvido para disicplina de IHC",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
