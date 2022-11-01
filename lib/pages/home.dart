@@ -6,6 +6,7 @@ import '../components/action_icon.dart';
 import '../components/button.dart';
 import '../components/settings.dart';
 import '../components/spacing.dart';
+import '../controllers/score_controller.dart';
 import '../controllers/sounds_controller.dart';
 import '../values/app_colors.dart';
 
@@ -43,6 +44,24 @@ class _HomeState extends State<Home> {
               'assets/images/illustration.svg',
               color: AppColors.tertiaryLight,
               height: 600,
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 24.0),
+              child: FutureBuilder<double>(
+                initialData: 0,
+                future: ScoreController.instance.getScore(),
+                builder: (_, snapshot) => Text(
+                  'Pontuação: ${snapshot.data}',
+                  style: const TextStyle(
+                    fontSize: 38,
+                    fontFamily: 'Fredoka',
+                    color: AppColors.text,
+                  ),
+                ),
+              ),
             ),
           ),
           Positioned.fill(

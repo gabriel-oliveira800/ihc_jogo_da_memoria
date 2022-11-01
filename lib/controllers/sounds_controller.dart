@@ -12,6 +12,9 @@ class SoundsController extends ChangeNotifier {
     ..setVolume(0.75)
     ..play();
 
+  final AudioPlayer successAudioPlayer = AudioPlayer()
+    ..setAsset('assets/sounds/game-victory.wav');
+
   bool isMusicOn = true;
   bool isEffectsOn = true;
 
@@ -40,5 +43,12 @@ class SoundsController extends ChangeNotifier {
     }
 
     onPressed?.call();
+  }
+
+  Future<void> playGameSuccessSound() async {
+    if (isEffectsOn) {
+      await successAudioPlayer.load();
+      await successAudioPlayer.play();
+    }
   }
 }

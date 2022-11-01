@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:uuid/uuid.dart';
 
 import '../models/card_info.dart';
+
+import 'score_controller.dart';
 
 enum GameDifficulty {
   easy,
@@ -19,9 +23,11 @@ class GameController extends ChangeNotifier {
 
   bool gameOver = false;
   bool gameStarted = false;
-  List<CardInfo> cards = [];
   bool isGameFinished = false;
   bool viewCardToMemorized = false;
+
+  List<CardInfo> cards = [];
+  int seedGeneratedImgs = 0;
   GameDifficulty difficulty = GameDifficulty.easy;
 
   int get maxGeneratedCards => 10;
@@ -37,19 +43,27 @@ class GameController extends ChangeNotifier {
       maxGeneratedCards ~/ 2,
       (index) => MapEntry<String, String>(
         const Uuid().v4(),
-        'https://source.unsplash.com/random?sig=$index/200x200',
+        'https://source.unsplash.com/random?sig=${index + seedGeneratedImgs}/200x200',
       ),
     );
 
     for (int i = 0; i < maxGeneratedCards; i++) {
       final data = imgs[i % (maxGeneratedCards ~/ 2)];
-      cards.add(CardInfoNetwork(id: data.key, url: data.value));
+      cards.add(CardInfoNetwork(
+        id: data.key,
+        url: data.value,
+        decoration: DecorationImage(
+          fit: BoxFit.cover,
+          image: NetworkImage(data.value),
+        ),
+      ));
     }
 
     cards.shuffle();
-    await toggleCardVisibility(duration: const Duration(seconds: 4));
+    await toggleCardVisibility(duration: const Duration(seconds: 8));
 
     gameStarted = true;
+    seedGeneratedImgs = Random().nextInt(255);
     notifyListeners();
   }
 
@@ -88,6 +102,9 @@ class GameController extends ChangeNotifier {
 
     selectedCards.clear();
     isGameFinished = cards.every((card) => card.isActive);
+    if (isGameFinished) {
+      await ScoreController.instance.updateScore(100);
+    }
 
     notifyListeners();
   }
@@ -102,10 +119,9 @@ class GameController extends ChangeNotifier {
   }
 
   void finishGame() async {
-    gameOver = false;
     gameStarted = false;
+    isGameFinished = false;
     viewCardToMemorized = false;
-    difficulty = GameDifficulty.easy;
 
     notifyListeners();
   }

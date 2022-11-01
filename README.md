@@ -1,16 +1,17 @@
-# ihc_jogo_da_memoria
+# IHC Jogo da Memoria
 
-A new Flutter project.
+Projeto desenvolvido para a disciplina de Interação Humano Computador do curso de Licenciatura em Computação do Instituto Federal de Educação, Ciência e Tecnologia Bahia  - Campus de Porto Seguro.
 
-## Getting Started
+## Objetivo
 
-This project is a starting point for a Flutter application.
+Inicialmente criar wireframes e protótipos de baixa fidelidade para o jogo da memória, e posteriormente criar protótipos de alta fidelidade,  usando o [Flutter](https://docs.flutter.dev/).
 
-A few resources to get you started if this is your first Flutter project:
+## Protótipo
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+O protótipo foi desenvolvido usando o [Figma](https://www.figma.com/).
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Tela01](/screenshots/demo1.png)
+
+![Tela01](/screenshots/demo2.png)
+
+![Tela01](/screenshots/demo3.png)

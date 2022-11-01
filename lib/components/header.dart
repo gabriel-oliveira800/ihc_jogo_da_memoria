@@ -1,8 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 
 import '../controllers/game_controller.dart';
+import '../controllers/score_controller.dart';
 import '../routes.dart';
 import '../values/app_colors.dart';
 
@@ -47,18 +50,29 @@ class _HeaderState extends State<Header> {
           _progressDifficult = diff[GameController.instance.difficulty] ?? 0.005;
         });
       }
+
+      if (GameController.instance.isGameFinished) {
+        _timer?.cancel();
+        _timer = null;
+        _progressValue = 1.0;
+        if (!_processStream.isClosed) {
+          _processStream.close();
+        }
+      }
     });
 
     _processStream.stream.listen((process) => handleGameOver(process <= 0.0));
   }
 
-  void handleGameOver(bool isFinished) {
+  void handleGameOver(bool isFinished) async {
     if (!isFinished) return;
 
     _timer?.cancel();
     _timer = null;
     _progressValue = 1.0;
     GameController.instance.finishGame();
+    await ScoreController.instance.updateScore(100, isNegative: true);
+
     Navigator.of(context).pushNamed(Routes.gameOver);
   }
 

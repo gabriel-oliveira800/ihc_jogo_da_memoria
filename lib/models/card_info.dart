@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 abstract class CardInfo {
   final String id;
   final String url;
@@ -22,18 +24,27 @@ abstract class CardInfo {
 }
 
 class CardInfoNetwork extends CardInfo {
+  final DecorationImage decoration;
+
   const CardInfoNetwork({
     required super.id,
     required super.url,
     super.isActive = false,
+    required this.decoration,
   });
 
   @override
-  CardInfo copyWith({String? id, String? url, bool? isActive}) {
+  CardInfo copyWith({
+    String? id,
+    String? url,
+    bool? isActive,
+    DecorationImage? decoration,
+  }) {
     return CardInfoNetwork(
       id: id ?? this.id,
       url: url ?? this.url,
       isActive: isActive ?? this.isActive,
+      decoration: decoration ?? this.decoration,
     );
   }
 }

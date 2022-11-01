@@ -31,10 +31,7 @@ class MemoryCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: NetworkImage(cardInfo.url),
-        ),
+        image: (cardInfo as CardInfoNetwork).decoration,
       ),
     );
   }

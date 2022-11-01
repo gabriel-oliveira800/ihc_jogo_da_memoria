@@ -24,11 +24,11 @@ class _GameState extends State<Game> {
     GameController().addListener(checkIfGameIsFinished);
   }
 
-  void checkIfGameIsFinished() {
+  void checkIfGameIsFinished() async {
     if (!GameController.instance.isGameFinished) return;
 
-    Navigator.of(context).pushNamed(Routes.gameSuccess);
     GameController.instance.finishGame();
+    Navigator.of(context).pushNamed(Routes.gameSuccess);
   }
 
   void handleTap(CardInfo card) async {

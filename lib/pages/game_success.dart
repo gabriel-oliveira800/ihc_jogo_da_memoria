@@ -5,6 +5,7 @@ import 'package:ihc_jogo_da_memoria/routes.dart';
 import '../components/button.dart';
 import '../components/header.dart';
 import '../components/spacing.dart';
+import '../controllers/sounds_controller.dart';
 import '../values/app_colors.dart';
 
 class GameSuccess extends StatefulWidget {
@@ -15,6 +16,16 @@ class GameSuccess extends StatefulWidget {
 }
 
 class _GameSuccessState extends State<GameSuccess> {
+  @override
+  void initState() {
+    super.initState();
+    handlePlayGameVictorySound();
+  }
+
+  void handlePlayGameVictorySound() async {
+    await SoundsController.instance.playGameSuccessSound();
+  }
+
   @override
   Widget build(BuildContext context) {
     const EdgeInsets padding = EdgeInsets.symmetric(
